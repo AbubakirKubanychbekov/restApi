@@ -1,6 +1,5 @@
 package peaksoft.dto;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -16,8 +15,10 @@ public class StudentResponse {
     private LocalDate createdDate;
     private LocalDate graduationDate;
     private boolean isBlock;
+    private String phoneNumber;
 
-    public StudentResponse(Long id, String fullName, int age, String email, LocalDate createdDate, LocalDate graduationDate, boolean isBlock) {
+
+    public StudentResponse(Long id, String fullName, int age, String email, LocalDate createdDate, LocalDate graduationDate, boolean isBlock, String phoneNumber) {
         this.id = id;
         this.fullName = fullName;
         this.age = age;
@@ -25,5 +26,6 @@ public class StudentResponse {
         this.createdDate = createdDate;
         this.graduationDate = graduationDate;
         this.isBlock = isBlock;
+        this.phoneNumber = phoneNumber;
     }
 }

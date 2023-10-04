@@ -1,5 +1,6 @@
 package peaksoft.service;
 
+import peaksoft.dto.PaginationResponse;
 import peaksoft.dto.SimpleResponse;
 import peaksoft.dto.StudentRequest;
 import peaksoft.dto.StudentResponse;
@@ -19,5 +20,5 @@ public interface StudentService {
     SimpleResponse deleteStudent(Long id);
 
 
-
+    PaginationResponse getAllPagination(int currentPage, int pageSize);
 }

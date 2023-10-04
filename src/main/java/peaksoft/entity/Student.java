@@ -11,7 +11,8 @@ import java.time.LocalDate;
 
 @Entity
 @Table(name = "students")
-@Getter @Setter
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 public class Student {  // TODO STUDENT MODEL
@@ -30,10 +31,14 @@ public class Student {  // TODO STUDENT MODEL
     private String firstName;
     private String lastName;
     private int age;
+
+    @Column(unique = true)
     private String email;
+
     private LocalDate createdDate;
     private LocalDate graduationDate;
     private boolean isBlock;
 
+    private String phoneNumber;
 
 }

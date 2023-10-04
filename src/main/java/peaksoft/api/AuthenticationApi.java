@@ -1,7 +1,8 @@
 package peaksoft.api;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
-import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,13 +13,15 @@ import peaksoft.dto.SignUpRequest;
 import peaksoft.service.AuthenticationService;
 
 @RestController
-@RequestMapping("/auth")
+@RequestMapping("/api/auth")
 @RequiredArgsConstructor
-public class AuthenticationApi {
+@Tag(name = "AuthenticationApi")
+public class AuthenticationApi{
 
     private final AuthenticationService authenticationService;
 
     @PostMapping("/signUp")
+    @Operation(summary = "Sign Up",description = "to sign up fill all the")
     AuthenticationResponse signUp(@RequestBody SignUpRequest signUpRequest){
     return authenticationService.signUp(signUpRequest);
     }
@@ -29,3 +32,5 @@ public class AuthenticationApi {
     }
 
 }
+
+//jdbc template

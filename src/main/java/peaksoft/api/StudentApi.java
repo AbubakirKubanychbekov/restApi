@@ -1,13 +1,15 @@
 package peaksoft.api;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.annotation.security.PermitAll;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+import peaksoft.dto.PaginationResponse;
 import peaksoft.dto.SimpleResponse;
 import peaksoft.dto.StudentRequest;
 import peaksoft.dto.StudentResponse;
-import peaksoft.entity.Student;
 import peaksoft.service.StudentService;
 
 import java.util.List;
@@ -15,19 +17,20 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/students")
 @RequiredArgsConstructor
+@Tag(name = "StudentApi")
 public class StudentApi {
 
     private final StudentService studentService;
 
-    @PreAuthorize("hasAnyAuthority('ADMIN','INSTRUCTOR')")
+    @PermitAll
     @GetMapping
-    public List<StudentResponse> getAllStudents() {
+    public List<StudentResponse> getAllStudents(){
         return studentService.getAllStudent();
     }
 
     @PreAuthorize("hasAnyAuthority('ADMIN')")
     @PostMapping
-    public StudentResponse saveStudent(@RequestBody StudentRequest studentRequest) {
+    public StudentResponse saveStudent(@RequestBody @Valid StudentRequest studentRequest) {
        return studentService.saveStudent(studentRequest);
     }
 
@@ -48,6 +51,13 @@ public class StudentApi {
     @DeleteMapping("/{studentId}")
     SimpleResponse deleteStudent(@PathVariable Long studentId) {
         return studentService.deleteStudent(studentId);
+    }
+
+    @GetMapping("/pagination")
+    public PaginationResponse paginationResponse(@RequestParam int currentPage,
+                                          @RequestParam int pageSize){
+        return studentService.getAllPagination(currentPage,pageSize);
+
     }
 
 }
